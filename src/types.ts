@@ -9,6 +9,13 @@ interface CreateQuestion {
 	tags: string
 }
 
+interface User {
+	name: string,
+	class: string,
+	token?: string,
+	id?: number
+}
+
 interface Question extends CreateQuestion {
 	answered: boolean,
 	submitAt: string,
@@ -20,5 +27,6 @@ interface Question extends CreateQuestion {
 export {
 	Id,
 	CreateQuestion,
-	Question
+	Question,
+	User
 }
