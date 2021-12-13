@@ -81,8 +81,29 @@ const listNotAnsweredQuestions = async (): Promise<Question> => {
 	return questions
 }
 
+
+const updateQuestion = async (question: Question, id: number) => {
+
+	const values: any[] = [
+		question.answeredBy,
+		question.answeredAt,
+		question.answer,
+		question.answered,
+		id,
+	]
+
+
+	await connection.query(`
+		UPDATE questions
+			SET answered_by = $1, answered_at=$2, answer=$3, answered=$4
+		WHERE id = $5;
+	`, values)
+
+}
+
 export {
 	addQuestion,
 	findById,
-	listNotAnsweredQuestions
+	listNotAnsweredQuestions,
+	updateQuestion
 }

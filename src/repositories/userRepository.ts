@@ -17,6 +17,16 @@ const addUser = async (user: User): Promise<string> => {
 	return result.rows[0]
 }
 
+const findUser = async (token: string): Promise<string> => {
+
+	const result = await connection.query(`
+		SELECT name FROM users WHERE token = $1;
+	`, [token])
+
+	return result.rows[0].name
+}
+
 export {
-	addUser
+	addUser,
+	findUser
 }
