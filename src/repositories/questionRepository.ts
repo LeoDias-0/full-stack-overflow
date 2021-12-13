@@ -53,7 +53,36 @@ const findById = async (id: Id): Promise<Question> => {
 	return result.rows[0]
 }
 
+const listNotAnsweredQuestions = async (): Promise<Question> => {
+	const result = await connection.query(`
+		SELECT * FROM questions
+	`)
+
+	const questions: any = result.rows.filter(a => !a.answered).map((ques): Question => {
+		const {
+			question,
+			student,
+			class: className,
+			tags,
+			answered,
+			submitAt,
+		} = ques
+
+		return {
+			question,
+			student,
+			class: className,
+			tags,
+			answered,
+			submitAt,
+		}
+	})
+
+	return questions
+}
+
 export {
 	addQuestion,
-	findById
+	findById,
+	listNotAnsweredQuestions
 }

@@ -27,7 +27,15 @@ const findQuestionById = async (req: Request, res: Response) => {
 	res.status(200).send(result)
 }
 
+const listQuestions = async (req: Request, res: Response) => {
+
+	const result = await questionRepository.listNotAnsweredQuestions()
+
+	res.status(200).send(result)
+}
+
 export {
 	createQuestion,
-	findQuestionById
+	findQuestionById,
+	listQuestions
 }
